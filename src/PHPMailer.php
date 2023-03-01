@@ -2411,10 +2411,12 @@ class PHPMailer
     */
     protected function sesSend($header, $body)
     {
-        if (!$this->sesConnect([
+        $options = [
             'credentials' => $this->SESCredentials,
             'region' => $this->SESRegion
-        ])) {
+        ];
+
+        if (!$this->sesConnect($options)) {
             throw new Exception($this->lang('ses_connect_failed'), self::STOP_CRITICAL);
         }
 
